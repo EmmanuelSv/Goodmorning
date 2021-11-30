@@ -1,0 +1,357 @@
+/* codepen attributes 
+*/
+
+
+@import url("https://fonts.googleapis.com/css2?family=Bevan&family=Monoton&display=swap");
+
+$white: #fdfdfb;
+$antique-white: #fae6ce;
+$orange-red: #f46a55;
+$beige: #eef0da;
+$powder-blue: #bededd;
+$opal: #98b0b0;
+$coffee: #664939;
+$tumbleweed: #dda982;
+$almond: #f2e1cd;
+$deep-champagne: #f4d2a2;
+$light-french-beige: #c1a784;
+
+$main: "Monoton", sans-serif;
+$sub: "Bevan", sans-serif;
+$main-size: 4rem;
+$main-lh: 3.5rem;
+$sub-size: 4rem;
+$sub-lh: 1.5rem;
+
+@mixin flex($direction, $wrap, $ai, $ac, $jc) {
+	display: flex;
+	flex-flow: $direction $wrap;
+	align-items: $ai;
+	align-content: $ac;
+	justify-content: $jc;
+}
+
+@mixin text-stroke($s, $c) {
+	-webkit-text-stroke: $s $c;
+}
+
+@mixin pseudo($text, $font, $fs, $lh, $s, $c) {
+	content: "#{$text}";
+	position: absolute;
+	z-index: -1;
+	font-family: $font;
+	font-size: $fs;
+	line-height: $lh;
+	@include text-stroke($s, $c);
+}
+
+// https://css-tricks.com/creating-playful-effects-with-css-text-shadows/
+
+@function textShadow($step, $size, $color) {
+	$value: null;
+	$offset: 0;
+	$length: $size * (1 / $step) - 1;
+
+	@for $i from 0 through $length {
+		$offset: $offset + $step;
+		$shadow: $offset + rem $offset + rem $color;
+		$value: append($value, $shadow, comma);
+	}
+
+	@return $value;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	position: relative;
+	width: 100vw;
+	max-width: 60rem;
+	height: 100vh;
+	margin: auto;
+	padding: 3rem;
+	overflow: hidden;
+	background: linear-gradient(to bottom right, $beige, $powder-blue);
+
+	@include flex(column, nowrap, center, center, center);
+}
+
+.shadow {
+	position: absolute;
+	width: 80rem;
+	height: 29.9rem;
+	top: 32rem;
+	left: 3.45rem;
+	background: $opal;
+	z-index: -2;
+	transform-origin: 50% 50%;
+	transform: rotate(45deg);
+
+	&:before {
+		content: "";
+		position: absolute;
+		width: 8rem;
+		height: 3rem;
+		top: -6rem;
+		right: 66.3rem;
+		background: transparent;
+
+		border-radius: 0 3rem 0 0;
+		border: 2.25rem solid $opal;
+		z-index: -2;
+	}
+}
+
+.coffee {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+
+	&__saucer {
+		position: absolute;
+		width: 35rem;
+		height: 35rem;
+		top: 0rem;
+		left: 0rem;
+		border-radius: 50%;
+		background: $deep-champagne;
+		z-index: -1;
+		overflow: hidden;
+
+		box-shadow: inset $antique-white 0.5rem 0.5rem;
+
+		&__shadow {
+			position: absolute;
+			width: 25rem;
+			height: 25rem;
+			top: 13rem;
+			left: 13rem;
+			background: $light-french-beige;
+			z-index: -2;
+			transform-origin: 50% 50%;
+			transform: rotate(45deg);
+
+			&:before {
+				content: "";
+				position: absolute;
+				width: 8rem;
+				height: 3rem;
+				top: -6rem;
+				right: 11rem;
+				background: $deep-champagne;
+
+				border-radius: 0 3rem 3rem 3rem;
+				border: 2.25rem solid $light-french-beige;
+				z-index: -2;
+			}
+		}
+	}
+
+	&__mug {
+		position: absolute;
+		top: 5rem;
+		left: 5rem;
+		width: 25rem;
+		height: 25rem;
+		border-radius: 50%;
+		background: $almond;
+
+		box-shadow: inset $white 0.5rem 0.5rem;
+
+		&__drink {
+			position: absolute;
+			top: 2.5rem;
+			left: 2.5rem;
+			width: 20rem;
+			height: 20rem;
+			border-radius: 50%;
+			background: $coffee;
+
+			box-shadow: inset rgba($coffee, 0.5) 0.5rem 0.5rem,
+				inset $tumbleweed 2.5rem 2.5rem, inset $white -0.5rem -0.5rem,
+				inset $tumbleweed 0.5rem -0.5rem, inset $tumbleweed -0.75rem -0.75rem,
+				inset $tumbleweed -0.5rem 0.5rem;
+
+			&:after {
+				content: "";
+				position: absolute;
+				width: 20rem;
+				height: 20rem;
+				border-radius: 50%;
+
+				background: radial-gradient(
+						circle at 4rem 5rem,
+						$coffee,
+						$coffee 0.5rem,
+						transparent 0.6rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 6rem 3rem,
+						$coffee,
+						$coffee 0.25rem,
+						transparent 0.3rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 7rem 3.5rem,
+						$coffee,
+						$coffee 0.25rem,
+						transparent 0.3rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 12rem 1.5rem,
+						$coffee,
+						$coffee 0.3rem,
+						transparent 0.4rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 9rem 2rem,
+						$coffee,
+						$coffee 0.15rem,
+						transparent 0.2rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 7.5rem 1rem,
+						$coffee,
+						$coffee 0.15rem,
+						transparent 0.2rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 6rem 4rem,
+						$coffee,
+						$coffee 0.3rem,
+						transparent 0.4rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 14rem 2rem,
+						$coffee,
+						$coffee 0.25rem,
+						transparent 0.3rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 13rem 2rem,
+						$coffee,
+						$coffee 0.15rem,
+						transparent 0.2rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 2rem 6rem,
+						$coffee,
+						$coffee 0.2rem,
+						transparent 0.3rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 2.5rem 7rem,
+						$coffee,
+						$coffee 0.15rem,
+						transparent 0.2rem,
+						transparent
+					),
+					radial-gradient(
+						circle at 1.5rem 6.5rem,
+						$coffee,
+						$coffee 0.15rem,
+						transparent 0.2rem,
+						transparent
+					);
+
+				animation: bubbles 6s linear infinite;
+			}
+		}
+	}
+
+	@keyframes bubbles {
+		50% {
+			transform: rotate(1deg);
+		}
+	}
+
+	&__mug__handle {
+		position: absolute;
+		width: 2.25rem;
+		height: 6.5rem;
+		top: 3rem;
+		left: 27rem;
+		border-radius: 0.25rem;
+		transform: rotate(45deg);
+		background: $almond;
+		z-index: 1;
+
+		box-shadow: -0.35rem 0 $white;
+	}
+}
+
+.text {
+	position: absolute;
+	top: 12.5rem;
+	left: 6.5rem;
+}
+
+p {
+	font-family: $main;
+	font-size: $main-size;
+	line-height: $main-lh;
+	color: $orange-red;
+	text-align: center;
+
+	animation: float 5s ease-in-out infinite;
+
+	&:last-of-type {
+		padding-top: 1rem;
+		font-family: $sub;
+		font-size: $sub-size;
+		line-height: $sub-lh;
+		color: $opal;
+		transform: rotate(-2deg);
+	}
+}
+
+@keyframes float {
+	50% {
+		transform: rotate(-1deg) scale(1.005);
+	}
+}
+
+.first {
+	&:before {
+		@include pseudo("Good", $main, $main-size, $main-lh, 0.25rem, $beige);
+		text-shadow: textShadow(0.1, 0.5, darken($coffee, 10));
+	}
+}
+
+.second {
+	&:before {
+		@include pseudo("Morning", $main, $main-size, $main-lh, 0.25rem, $beige);
+		text-shadow: textShadow(0.1, 0.5, darken($coffee, 10));
+	}
+}
+
+.third {
+	&:before {
+		@include pseudo("Friends", $sub, $sub-size, $sub-lh, 0.5rem, $white);
+		text-shadow: textShadow(0.1, 0.5, $orange-red);
+	}
+}
+
+@media (max-width: 800px) {
+	body {
+		height: 130vh;
+		transform: scale(0.55);
+		margin: -3rem;
+		padding: 0;
+	}
+}
